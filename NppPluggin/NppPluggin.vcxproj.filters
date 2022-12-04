@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="DockingFeature">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src\custom">
+      <UniqueIdentifier>{fa9861e1-acc4-4acc-8d99-6e9c510ddf4b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DockingFeature\Docking.h">
+      <Filter>DockingFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="DockingFeature\DockingDialog.h">
+      <Filter>DockingFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="DockingFeature\DockingDlgInterface.h">
+      <Filter>DockingFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="DockingFeature\dockingResource.h">
+      <Filter>DockingFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="DockingFeature\resource.h">
+      <Filter>DockingFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="DockingFeature\StaticDialog.h">
+      <Filter>DockingFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="DockingFeature\Window.h">
+      <Filter>DockingFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menuCmdID.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Notepad_plus_msgs.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PluginDefinition.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PluginInterface.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sci_Position.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scintilla.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\custom\NppApi.h">
+      <Filter>src\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="src\custom\DialogController.h">
+      <Filter>src\custom</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DockingFeature\DockingDialog.cpp">
+      <Filter>DockingFeature</Filter>
+    </ClCompile>
+    <ClCompile Include="DockingFeature\StaticDialog.cpp">
+      <Filter>DockingFeature</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NppPlugin.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginDefinition.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\custom\NppApi.cpp">
+      <Filter>src\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="src\custom\DialogController.cpp">
+      <Filter>src\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="src\custom\PluginFunctions.cpp">
+      <Filter>src\custom</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DockingFeature\goLine.rc">
+      <Filter>DockingFeature</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
