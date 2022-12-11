@@ -27,6 +27,7 @@
     <ClInclude Include="DockingFeature\StaticDialog.h" />
     <ClInclude Include="DockingFeature\Window.h" />
     <ClInclude Include="src\custom\DialogController.h" />
+    <ClInclude Include="src\custom\Feature.h" />
     <ClInclude Include="src\custom\NppApi.h" />
     <ClInclude Include="src\menuCmdID.h" />
     <ClInclude Include="src\Notepad_plus_msgs.h" />
@@ -46,6 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DockingFeature\goLine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.vcxproj">
+      <Project>{fd8dfd3f-7ce4-4f38-9bc9-8904cf6b713b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

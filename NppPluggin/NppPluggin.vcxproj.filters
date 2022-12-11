@@ -59,6 +59,9 @@
     <ClInclude Include="src\custom\DialogController.h">
       <Filter>src\custom</Filter>
     </ClInclude>
+    <ClInclude Include="src\custom\Feature.h">
+      <Filter>src\custom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DockingFeature\DockingDialog.cpp">

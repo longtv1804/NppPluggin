@@ -12,18 +12,22 @@ namespace LOGGING {
 
 		char NPath[MAX_PATH];
 		GetCurrentDirectoryA(MAX_PATH, NPath);
-		mLogPath = std::string(NPath) + "runtime.log";
+		string p = std::string(NPath) + "\\runtime.log";
+
+		writeLine(HIGH, "=== start NPP Pluggin ===");
+		writeLine(HIGH, p);
 	}
+
 	Log::~Log() {
 	}
 
-	void Log::write(eDebugLevel lv, string str) {
+	void Log::writeLine (eDebugLevel lv, string str) {
 		if (lv >= mDebugLevel) {
 			ofstream file;
-			file.open(mLogPath);
+			file.open(mLogPath, std::ios::app); // std::ios::app is the open mode "append" meaning
 
 			if (file.is_open()) {
-				file << str;
+				file << str + "\n";
 			}
 			file.close();
 		}
@@ -33,12 +37,12 @@ namespace LOGGING {
 		mIns.mDebugLevel = lv;
 	}
 	void Log::e(string str) {
-		mIns.write(HIGH, str);
+		mIns.writeLine(HIGH, str);
 	}
 	void Log::d(string str) {
-		mIns.write(MID, str);
+		mIns.writeLine(MID, str);
 	}
 	void Log::i(string str) {
-		mIns.write(LOW, str);
+		mIns.writeLine(LOW, str);
 	}
 };

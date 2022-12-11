@@ -4,7 +4,7 @@ using std::string;
 
 namespace LOGGING {
 	enum eDebugLevel {
-		HIGH, MID, LOW
+		LOW, MID, HIGH
 	};
 
 	class Log {
@@ -14,7 +14,7 @@ namespace LOGGING {
 		static Log mIns;
 
 		Log();
-		void write (eDebugLevel lv, string str);
+		void writeLine (eDebugLevel lv, string str);
 		string getTimeStamp();
 
 	public:

@@ -26,8 +26,17 @@ void showMessageBox(string str);
 void showTextInCurentDocument(string str);
 void showTextInNewDocument(string str);
 
-
-list<string> getSelectedText();
+/*
+ * get selected text
+ */
+list<string> getSelectedLines();
 string getExactSelectedText();
 
+/*
+ * API with file
+ */
+string getFilePath();
+string getFileName();
+string getCurrentFileDirectory();
 
+void openFile(string path);

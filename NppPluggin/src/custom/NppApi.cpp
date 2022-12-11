@@ -1,7 +1,14 @@
+#include <atlstr.h> // for convert TCHAR >< string
+
 #include "NppApi.h"
-//#include <WinUser.h>
 #include "DialogController.h"
 #include "../menuCmdID.h"
+#include "Feature.h"
+
+#ifdef FEATURE_DEBUG_LOG
+#include "../../../Logging/Logging.h"
+using std::to_string;
+#endif // FEATURE_DEBUG_LOG
 
 ResultDialog* mResultDialog = NULL;
 
@@ -54,7 +61,7 @@ void showTextInNewDocument(string str) {
 }
 
 #define MAX_LINE_CHAR 5000
-list<string> getSelectedText() {
+list<string> getSelectedLines() {
     HWND curScintilla = getCurrentScintilla();
     //if (curScintilla == null) return null;
 
@@ -63,7 +70,7 @@ list<string> getSelectedText() {
     int startLine = (int) ::SendMessage(curScintilla, SCI_LINEFROMPOSITION, startPos, 0);
     int endLine = (int) ::SendMessage(curScintilla, SCI_LINEFROMPOSITION, endPos, 0);
 
-    char* textLine = new char[MAX_LINE_CHAR];
+    char textLine[MAX_LINE_CHAR];
     list<string> ret;
     for (int i = startLine; i <= endLine; i++) {
         int len = (int) ::SendMessage(curScintilla, SCI_LINELENGTH, i, 0);
@@ -72,4 +79,62 @@ list<string> getSelectedText() {
         ret.push_back(text);
     }
     return ret;
+}
+
+string getExactSelectedText() {
+    HWND curScintilla = getCurrentScintilla();
+    if (curScintilla == NULL) return "";
+
+    int startPos = (int) ::SendMessage(curScintilla, SCI_GETSELECTIONSTART, 0, 0);
+    int endPos = (int) ::SendMessage(curScintilla, SCI_GETSELECTIONEND, 0, 0);
+    int startLine = (int) ::SendMessage(curScintilla, SCI_LINEFROMPOSITION, startPos, 0);
+    int endLine = (int) ::SendMessage(curScintilla, SCI_LINEFROMPOSITION, endPos, 0);
+
+    if (startLine != endLine) {
+        throw new std::exception("selected text should be on a single line");
+    }
+    else if (endPos <= startPos) {
+        return "";
+    }
+    else {
+        TCHAR text[MAX_LINE_CHAR] = { 0, };
+        ::SendMessage(curScintilla, SCI_GETSELTEXT, 0, (LPARAM)text);
+        std::wstring tempStr(text);
+        return string(tempStr.begin(), tempStr.end());
+    }
+}
+
+string getFilePath() {
+    TCHAR cpath[MAX_PATH] = { 0, };
+    bool res = ::SendMessage(nppData._nppHandle, NPPM_GETFULLCURRENTPATH, (WPARAM)MAX_PATH, (LPARAM)cpath);
+    std::wstring tempStr(cpath);
+    string path(tempStr.begin(), tempStr.end());
+    return path; 
+}
+
+string getFileName() {
+    TCHAR cName[MAX_PATH] = { 0, };
+    bool res = ::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, (WPARAM)MAX_PATH, (LPARAM)cName);
+    std::wstring tempStr(cName);
+    return string(tempStr.begin(), tempStr.end());
+}
+
+string getCurrentFileDirectory() {
+    string path = getFilePath();
+    string fileName = getFileName();
+    if (path.empty() || fileName.empty()) {
+        return "";
+    }
+    int pos = path.find(fileName);
+    if (pos == string::npos) {
+        return "";
+    }
+    return path.erase(pos, fileName.size());
+}
+
+void openFile(string path) {
+    TCHAR tPath[MAX_PATH];
+    _tcscpy_s(tPath, CA2T(path.c_str()));
+    
+    ::SendMessage(nppData._nppHandle, NPPM_DOOPEN, 0, (LPARAM)tPath);
 }
