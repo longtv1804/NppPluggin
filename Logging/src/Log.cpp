@@ -1,7 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "Log.h"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
+#include <time.h>
 using std::ofstream;
 
 namespace LOGGING {
@@ -12,16 +15,26 @@ namespace LOGGING {
 
 		char NPath[MAX_PATH];
 		GetCurrentDirectoryA(MAX_PATH, NPath);
-		string p = std::string(NPath) + "\\runtime.log";
+		mLogPath = std::string(NPath) + "\\runtime.log";
 
-		writeLine(HIGH, "=== start NPP Pluggin ===");
-		writeLine(HIGH, p);
+		writeLine(DEBUG, "=== start NPP Pluggin ===");
 	}
 
 	Log::~Log() {
 	}
 
-	void Log::writeLine (eDebugLevel lv, string str) {
+	string Log::getTimeStamp()
+	{
+		time_t t = time(0);
+		struct tm* _t;
+		char timeCString[25] = { 0, };
+		
+		_t = localtime(&t);
+		strftime(timeCString, 25, "%Y.%d.%m %H:%M:%S", _t);
+		return string(timeCString);
+	}
+
+	void Log::writeLine (eLoggLevel lv, string str) {
 		if (lv >= mDebugLevel) {
 			ofstream file;
 			file.open(mLogPath, std::ios::app); // std::ios::app is the open mode "append" meaning
@@ -37,12 +50,12 @@ namespace LOGGING {
 		mIns.mDebugLevel = lv;
 	}
 	void Log::e(string str) {
-		mIns.writeLine(HIGH, str);
+		mIns.writeLine(ERR, str);
 	}
 	void Log::d(string str) {
-		mIns.writeLine(MID, str);
+		mIns.writeLine(DEBUG, str);
 	}
 	void Log::i(string str) {
-		mIns.writeLine(LOW, str);
+		mIns.writeLine(INFO, str);
 	}
 };

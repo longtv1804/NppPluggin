@@ -9,10 +9,13 @@ void finallizePluginFunction() {
 
 void decode() {
     try {
-        //list<string> bundle = getSelectedText();
-        //showResult(listToString(bundle));
-        string text = "this is test";
-        showTextToDialog(text);
+        string path = getFilePath();
+        
+        string text = getExactSelectedText();
+        showTextToDialog(path + "\n" + text);
+
+        path = "E:\\WorkSpace_longtv1804\\GIT\\NppPluggin\\Debug\\op.txt";
+        openFile(path);
     }
     catch (const std::exception & e) {
         showMessageBox(e.what());
